@@ -82,26 +82,10 @@ shared/
 
 ## Key Files
 
-- **
-
-server.js
-
-**: The main server file.
-- **
-
-public
-
-**: Contains static files like HTML, CSS, and images.
-- **
-
-shared
-
-**: Directory for uploaded and downloadable files.
-- **
-
-package.json
-
-**: Contains project metadata and dependencies.
+- **server.js**: The main server file.
+- **public**: Contains static files like HTML, CSS, and images.
+- **shared**: Directory for uploaded and downloadable files.
+- **package.json**: Contains project metadata and dependencies.
 
 ## Useful Commands
 

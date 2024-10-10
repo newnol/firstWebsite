@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload and Download</title>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Add your CSS file here -->
+</head>
+<body>
+    <header>
+        <div id="branding">
+            <h1>Newnol Clolab</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="file.html">File</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="showcase">
+        <div class="container">
+            <h1>File Upload and Download</h1>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <label for="file">Upload File:</label>
+                <input type="file" id="file" name="file">
+                <button type="submit">Upload</button>
+            </form>
+            <form action="/download" method="get">
+                <label for="filename">Download File:</label>
+                <input type="text" id="filename" name="filename" placeholder="Enter file name">
+                <button type="submit">Download</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Upload and Download</title>
+    <title>File Page</title>
     <link rel="stylesheet" href="css/styles.css"> <!-- Add your CSS file here -->
 </head>
 <body>
@@ -22,13 +22,14 @@
     </header>
 
     <section class="showcase">
-        <div class="container">
+        <div class="centered-text">
             <h1>File Upload and Download</h1>
-            <form action="/upload" method="post" enctype="multipart/form-data">
+            <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
                 <label for="file">Upload File:</label>
                 <input type="file" id="file" name="file">
                 <button type="submit">Upload</button>
             </form>
+            <div id="uploadResult"></div>
             <form action="/download" method="get">
                 <label for="filename">Download File:</label>
                 <input type="text" id="filename" name="filename" placeholder="Enter file name">
@@ -36,5 +37,21 @@
             </form>
         </div>
     </section>
+    <footer>
+        <p>Newnol Clolab &copy; 2023</p>
+    </footer>
+
+    <script>
+        document.getElementById('uploadForm').onsubmit = async function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.text();
+            document.getElementById('uploadResult').innerHTML = result;
+        };
+    </script>
 </body>
 </html>

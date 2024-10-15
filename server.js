@@ -9,6 +9,7 @@ const morgan = require('morgan');
 // Define the port
 const PORT = process.env.PORT || 3000;
 
+
 // Function to get the local IPv4 address of the wireless LAN
 function getLocalIPAddress() {
     const interfaces = os.networkInterfaces();
@@ -23,6 +24,7 @@ function getLocalIPAddress() {
     }
     return 'localhost';
 }
+
 
 // Serve static files from the /public directory
 app.use(express.static(path.join(__dirname, 'public')));
@@ -64,10 +66,17 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+app.use(express.static('public'));
+
 // Handle file uploads
 app.post('/upload', upload.single('file'), (req, res) => {
-    res.send('File uploaded successfully');
-    
+    if (!req.file) {
+        return res.status(400).send('No files were uploaded.');
+    }
+    else {
+    const filePath = `../shared/${req.file.originalname}`;
+    res.send(`<p>File uploaded successfully. <a href="${filePath}">Download ${req.file.originalname}</a></p>`);
+    }
 });
 
 // Handle file downloads
@@ -80,6 +89,8 @@ app.get('/download', (req, res) => {
         res.status(404).send('File not found');
     }
 });
+
+app.use(express.static('public'));
 
 // Start the server and listen on all network interfaces
 app.listen(PORT, '0.0.0.0', () => {

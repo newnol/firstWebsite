@@ -21,6 +21,7 @@ Sure! Here are the steps and tools you need to download and set up your project 
 ## Step-by-Step Setup
 
 1. **Clone the Repository**
+
    - Open a terminal and navigate to the directory where you want to store your project.
    - Clone the repository (replace `<repository-url>` with your actual repository URL):
      ```sh
@@ -29,12 +30,14 @@ Sure! Here are the steps and tools you need to download and set up your project 
      ```
 
 2. **Install Dependencies**
+
    - In the terminal, run the following command to install the project dependencies:
      ```sh
      npm install
      ```
 
 3. **Run the Development Server**
+
    - Start the development server with the following command:
      ```sh
      npm run dev
@@ -42,6 +45,7 @@ Sure! Here are the steps and tools you need to download and set up your project 
    - Open your browser and navigate to `http://localhost:3000` to see your website in action.
 
 4. **Run the Production Server**
+
    - Build the project for production:
      ```sh
      npm run build

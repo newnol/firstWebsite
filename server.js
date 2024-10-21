@@ -3,12 +3,12 @@ const path = require('path');
 const os = require('os');
 const multer = require('multer');
 const fs = require('fs');
+const https = require('https');
 const app = express();
 const morgan = require('morgan');
 
 // Define the port
 const PORT = process.env.PORT || 3000;
-
 
 // Function to get the local IPv4 address of the wireless LAN
 function getLocalIPAddress() {
@@ -25,7 +25,6 @@ function getLocalIPAddress() {
     return 'localhost';
 }
 
-
 // Serve static files from the /public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -38,7 +37,7 @@ if (!fs.existsSync(logFilePath)) {
 }
 
 // Create a write stream (in append mode) to log file
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+const accessLogStream = fs.createWriteStream(logFilePath, { flags: 'a' });
 
 // Setup the logger
 app.use(morgan('combined', { stream: accessLogStream }));
@@ -92,7 +91,13 @@ app.get('/download', (req, res) => {
 
 app.use(express.static('public'));
 
-// Start the server and listen on all network interfaces
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server is running on http://${getLocalIPAddress()}:${PORT}`);
+// SSL options
+const sslOptions = {
+    key: fs.readFileSync(path.join(__dirname, 'key.pem')),
+    cert: fs.readFileSync(path.join(__dirname, 'cert.pem'))
+};
+
+// Create HTTPS server
+https.createServer(sslOptions, app).listen(PORT, () => {
+    console.log(`Server is running at https://localhost:${PORT}`);
 });

@@ -99,5 +99,5 @@ const sslOptions = {
 
 // Create HTTPS server
 https.createServer(sslOptions, app).listen(PORT, () => {
-    console.log(`Server is running at https://localhost:${PORT}`);
+    console.log(`Server is running at http://${getLocalIPAddress()}:${PORT}`);
 });
